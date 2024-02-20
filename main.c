@@ -47,11 +47,12 @@ int main(int argc, char** argv) {
 	get_eul(&bnod);
 	
     	obj_mesh_rotate_to(shape,bnod.eul_pitc*M_PI/180,bnod.eul_head*M_PI/180,bnod.eul_roll*M_PI/180);
+		obj_mesh_translate_by(shape, g_move_x, g_move_y, g_move_z);
     	render_write_shape(shape);
     	render_flush();
 #ifndef _WIN32
         // nanosleep does not work on Windows
-//        nanosleep((const struct timespec[]) {{0, (int)(1.0 / g_fps * 1e9)}}, NULL);
+        nanosleep((const struct timespec[]) {{0, (int)(1.0 / g_fps * 1e9)}}, NULL);
 #endif
     
     }while(1);
