@@ -2,13 +2,13 @@
 # Definitions
 ###############################################
 CC = gcc
-EXEC = 3Dbash
+EXEC = bash3D
 SRC_DIR = src
 INC_DIR = include
 # where to store the mesh (text) files -
 # set it from the command line if you want another location
 PREFIX = /usr
-CFG_DIR = $(PREFIX)/share/3Dbash
+CFG_DIR = $(PREFIX)/share/bash3D
 CFLAGS = -Wall -Wno-stringop-truncation -Wno-maybe-uninitialized -I$(INC_DIR)\
 	-std=gnu99 -O3 -DCFG_DIR=$(CFG_DIR)
 LDFLAGS = -lm
