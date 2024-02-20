@@ -89,7 +89,6 @@ make PREFIX=~/.config/retrocube
 # then you will see some binaries and run the binary of your choice
 ```
 
-
 #### 3.2 General installation
 
 The `Makefile` includes an installation command. The binary will be installed at `/usr/bin/cube` as:
@@ -115,39 +114,11 @@ Credits for the Nix packaging @pmarreck and @Quantenzitrone.
 
 By default the program runs forever so you can stop it with `Ctr+C`. Below are the command line arguments it accepts.
 
-
-| Short specifier | Long specifier            | Argument type | Default | Description                                                                                 |
-|:--------------- |:--------------------------|:--------------|:--------|:--------------------------------------------------------------------------------------------|
-| `-sx`           | `--speedx`                | float         | 0.7     |Rotational speed around the x axis (-1 to 1). If set, disables random rotations.             |
-| `-sy`           | `--speedy`                | float         | 0.4     |Rotational speed around the y axis (-1 to 1). If set, disables random rotations.             |
-| `-sz`           | `--speedz`                | float         | 0.6     |Rotational speed around the z axis (-1 to 1). If set, disables random rotations.             |
-| `-f`            | `--fps`                   | int           | 40      |Throttle the fps at which the graphics can be rendered (lower it if high CPU usage or if flicker) |
-| `-r`            | `--random`                | no argument   | On      |Rotate the shape randomly and sinusoidally.                                                  |
-| `-cx`           | `--cx`                    | int           | 0       |x-coordinate of the shapes's center in pixels                                                |
-| `-cy`           | `--cy`                    | int           | 0       |y-coordinate of the shapes's center in pixels                                                |
-| `-cz`           | `--cz`                    | int           | 0       |z-coordinate of the shapes's center in pixels                                                |
-| `-wi`           | `--width`                 | int           | 60      |Width of shape in pixels                                                                     |
-| `-he`           | `--height`                | int           | 60      |Height of shape in pixels                                                                    |
-| `-de`           | `--depth`                 | int           | 60      |Depth of shape in pixels                                                                     |
-| `-ff`           | `--from-file`             | string        | `./mesh_files/cube.scl` |The filepath to the mesh file to render. See `mesh_files` directory.         |
-| `-mi`           | `--maximum-iterations`    | int           | Inf/ty  |How many frames to run the program for                                                       |
-| `-up`           | `--use-perspective`       | no argument   | Off     |Whether or not to use pinhole camera's perspective transform on rendered pixels              |
-| `-be`           | `--bounce-every`          | int           | 0       |If non-zero (`-be N` or `--bounce-every N`), changes moving direction every N frames         |
-| `-mx`           | `--movex`                 | int           | 2       |Move the object by this many pixels along x axis per frame if bounce (`-b`/`--bounce`) is enabled. |
-| `-my`           | `--movey`                 | int           | 1       |Move the object by this many pixels along y axis per frame if bounce (`-b`/`--bounce`) is enabled. |
-| `-mz`           | `--movez`                 | int           | 1       |Move the object by this many pixels along z axis per frame if bounce (`-b`/`--bounce`) is enabled. |
-
 Below are two examples of running the demo binary `./cube`:
-
-`./cube` | `./cube -b 100 -cz 300 -my -1 -mz 1 -up`
-:-------------------------:|:-------------------------:
-![](https://github.com/leonmavr/retrocube/blob/master/assets/demo_still.gif?raw=true)  |  ![](https://raw.githubusercontent.com/leonmavr/retrocube/master/assets/demo_moving.gif)
-
 
 #### 4.2 Tips
 
 1. If the CPU usage is too high (it was low on my ancient laptop), you can reduce the fps e.g. to 15 by: `./cube -f 15` or `./cube --fps 15`.
-
 
 ### 5. Contributing
 
