@@ -42,10 +42,10 @@ extern int g_move_x;
 extern int g_move_y;
 extern int g_move_z;
 
-extern int g_cube_size = 50;
-extern int verbose = 0;
-extern char senaddr[256] = "0x28";
-extern char i2c_bus[256] = "/dev/i2c-1";
-extern char object_file[256] = "./mesh_files/cube.scl";
+extern int g_cube_size;
+extern int verbose;
+extern char senaddr[256];
+extern char i2c_bus[256];
+extern char object_file[256];
 
 void arg_parse(int argc, char** argv);
