@@ -55,25 +55,19 @@ void arg_parse(int argc, char** argv) {
     // parse command line arguments - if followed by an argument, e.g. -sx 0.9, increment `i`
     int i = 0;
     while (++i < argc) {
-        if ((strcmp(argv[i], "--speedx") == 0) || (strcmp(argv[i], "-sx") == 0)) {
-            g_rot_speed_x = atof(argv[++i]);
-            g_use_random_rotation = false;
-        } else if ((strcmp(argv[i], "--speedy") == 0) || (strcmp(argv[i], "-sy") == 0)) {
-            g_rot_speed_y = atof(argv[++i]);
-            g_use_random_rotation = false;
-        } else if ((strcmp(argv[i], "--speedz") == 0) || (strcmp(argv[i], "-sz") == 0)) {
-            g_rot_speed_z = atof(argv[++i]);
-            g_use_random_rotation = false;
-        } else if ((strcmp(argv[i], "--fps") == 0) || (strcmp(argv[i], "-f") == 0)) {
-            g_fps = atoi(argv[++i]);
-        } else if ((strcmp(argv[i], "--random") == 0) || (strcmp(argv[i], "-r") == 0)) {
-            g_use_random_rotation = true;
-        } else if ((strcmp(argv[i], "--cx") == 0) || (strcmp(argv[i], "-cx") == 0)) {
-            g_cx = atoi(argv[++i]);
-        } else if ((strcmp(argv[i], "--cy") == 0) || (strcmp(argv[i], "-cy") == 0)) {
-            g_cy = atoi(argv[++i]);
-        } else if ((strcmp(argv[i], "--cz") == 0) || (strcmp(argv[i], "-cz") == 0)) {
-            g_cz = atoi(argv[++i]);
+        if (strcmp(argv[i], "--i2cbus") == 0) {
+            strcpy (i2c_bus , argv[++i]);
+        } else if (strcmp(argv[i], "--size") == 0) {
+            g_cube_size = atoi(argv[++i]);
+        }
+		else if (strcmp(argv[i], "--help") == 0) {
+	    	printf("\n");    
+	    	printf("--i2cbus: Put the address of the i2c bus (default: /dev/i2c-1)\n");
+	    	printf("--object-file: Address to the object (default: ./mesh_files/cube.scl)\n");
+	    	printf("--size: Determine the size of the object (default: 50)\n");
+	    	printf("--help: show this message\n");
+	    	printf("\n");
+	    	exit(0);
         } else if ((strcmp(argv[i], "--width") == 0) || (strcmp(argv[i], "-wi") == 0)) {
             g_width = atoi(argv[++i]);
         } else if ((strcmp(argv[i], "--height") == 0) || (strcmp(argv[i], "-he") == 0)) {
@@ -84,14 +78,9 @@ void arg_parse(int argc, char** argv) {
             g_max_iterations = atoi(argv[++i]);
         } else if ((strcmp(argv[i], "--use-perspective") == 0) || (strcmp(argv[i], "-up") == 0)) {
             render_use_perspective(0, 0, -200);
-        } else if ((strcmp(argv[i], "--use-reflection") == 0) || (strcmp(argv[i], "-ur") == 0)) {
-            render_use_reflectance();
-        } else if ((strcmp(argv[i], "--from-file") == 0) || (strcmp(argv[i], "-ff") == 0)) {
+        } else if ((strcmp(argv[i], "--object-file") == 0) || (strcmp(argv[i], "-ff") == 0)) {
             i++;
-            strcpy(g_mesh_file, argv[i]);
-            render_from_file = true;
-        } else if ((strcmp(argv[i], "--bounce") == 0) || (strcmp(argv[i], "-b") == 0)) {
-            g_bounce_every = atoi(argv[++i]);
+            strcpy(object_file, argv[i]);
         } else if ((strcmp(argv[i], "--movex") == 0) || (strcmp(argv[i], "-mx") == 0)) {
             g_move_x = atoi(argv[++i]);
         } else if ((strcmp(argv[i], "--movey") == 0) || (strcmp(argv[i], "-my") == 0)) {
