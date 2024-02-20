@@ -8,6 +8,15 @@
 #include <time.h> // time
 #include <signal.h> // signal
 
+#include "getbno055.h"
+
+/* ------------------------------------------------------------ *
+ * Global variables and defaults                                *
+ * ------------------------------------------------------------ */
+int verbose = 0;
+char senaddr[256] = "0x28";
+char i2c_bus[256] = "/dev/i2c-1";
+
 /* Callback that clears the screen and makes the cursor visible when the user hits Ctr+C */
 static void interrupt_handler(int int_num) {
     if (int_num == SIGINT) {
@@ -19,41 +28,32 @@ static void interrupt_handler(int int_num) {
 int main(int argc, char** argv) {
     arg_parse(argc, argv);
 
+    get_i2cbus(i2c_bus, senaddr);
+
+    set_mode(ndof);
+
+    struct bnoeul bnod;
+
     // make sure we end gracefully if the user hits Ctr+C
     signal(SIGINT, interrupt_handler);
 
     render_init();
 
     mesh_t* shape = obj_mesh_from_file(g_mesh_file, g_cx, g_cy, g_cz, g_width, g_height, g_depth);
-    // spinning parameters in case random rotation was selected
-#ifndef _WIN32
-    const float random_rot_speed_x = 0.002, random_rot_speed_y = 0.002, random_rot_speed_z = 0.002;
-    const float amplitude_x = 4.25, amplitude_y = 4.25, amplitude_z = 4.25;
-#else
-    // make it spin faster on Windows because terminal refresh functions are sluggish there
-    const float random_rot_speed_x = 0.01, random_rot_speed_y = 0.01, random_rot_speed_z = 0.01;
-    const float amplitude_x = 6.0, amplitude_y = 6.0, amplitude_z = 6.0;
-#endif
-    for (size_t t = 0; t < g_max_iterations; ++t) {
-        if (g_use_random_rotation)
-            obj_mesh_rotate_to(shape, amplitude_x*sin(random_rot_speed_x*sin(random_rot_speed_x*t) + 2*random_bias_x),
-                                      amplitude_y*sin(random_rot_speed_y*random_bias_y*t           + 2*random_bias_y),
-                                      amplitude_z*sin(random_rot_speed_z*random_bias_z*t           + 2*random_bias_z));
-        else
-            obj_mesh_rotate_to(shape, g_rot_speed_x/20*t, g_rot_speed_y/20*t, g_rot_speed_z/20*t);
-		if (g_bounce_every != 0) {
-			if ((t % (2*g_bounce_every)) >= g_bounce_every)
-				obj_mesh_translate_by(shape, g_move_x, g_move_y, g_move_z);
-			else
-				obj_mesh_translate_by(shape, -g_move_x, -g_move_y, -g_move_z);
-		}
-        render_write_shape(shape);
-        render_flush();
+
+    do{    
+	get_eul(&bnod);
+	
+    	obj_mesh_rotate_to(shape,bnod.eul_pitc*M_PI/180,bnod.eul_head*M_PI/180,bnod.eul_roll*M_PI/180);
+    	render_write_shape(shape);
+    	render_flush();
 #ifndef _WIN32
         // nanosleep does not work on Windows
-        nanosleep((const struct timespec[]) {{0, (int)(1.0 / g_fps * 1e9)}}, NULL);
+//        nanosleep((const struct timespec[]) {{0, (int)(1.0 / g_fps * 1e9)}}, NULL);
 #endif
-    }
+    
+    }while(1);
+
     obj_mesh_free(shape);
     render_end();
 
