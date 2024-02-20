@@ -29,28 +29,6 @@ static void interrupt_handler(int int_num) {
 int main(int argc, char** argv) {
     arg_parse(argc, argv);
 
-    int i = 0;
-    while (++i < argc) {
-        if (strcmp(argv[i], "--i2cbus") == 0) {
-            strcpy (i2c_bus , argv[++i]);
-        } else if (strcmp(argv[i], "--size") == 0) {
-            g_cube_size = atoi(argv[++i]);
-        }
-	else if (strcmp(argv[i], "--object") == 0) {
-            strcpy (object_file , argv[++i]);
-	}
-	else if (strcmp(argv[i], "--help") == 0) {
-	    printf("\n");    
-	    printf("--i2cbus: Put the address of the i2c bus (default: /dev/i2c-1)\n");
-	    printf("--object: Address to the object (default: ./mesh_files/cube.scl)\n");
-	    printf("--size: Determine the size of the object (default: 50)\n");
-	    printf("--help: show this message\n");
-	    printf("\n");
-	    exit(0);
-	}
-    }
-
-
     get_i2cbus(i2c_bus, senaddr);
 
     set_mode(ndof);
