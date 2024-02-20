@@ -10,9 +10,9 @@
 
 #include "getbno055.h"
 
-/* ------------------------------------------------------------ *
- * Global variables and defaults                                *
- * ------------------------------------------------------------ */
+// Global variables and defaults 
+
+static unsigned g_cube_size = 50;
 int verbose = 0;
 char senaddr[256] = "0x28";
 char i2c_bus[256] = "/dev/i2c-1";
@@ -39,9 +39,10 @@ int main(int argc, char** argv) {
 
     render_init();
 
-    mesh_t* shape = obj_mesh_from_file(g_mesh_file, g_cx, g_cy, g_cz, g_width, g_height, g_depth);
-
-    do{    
+    // mesh_t* shape = obj_mesh_from_file(g_mesh_file, g_cx, g_cy, g_cz, g_width, g_height, g_depth);
+    mesh_t* shape = obj_mesh_from_file("./mesh_files/coffin.scl", g_cx, g_cy, g_cz, g_cube_size, 1.2*g_cube_size, g_cube_size);
+    
+	do{    
 	get_eul(&bnod);
 	
     	obj_mesh_rotate_to(shape,bnod.eul_pitc*M_PI/180,bnod.eul_head*M_PI/180,bnod.eul_roll*M_PI/180);
