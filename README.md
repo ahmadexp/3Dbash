@@ -1,4 +1,4 @@
-## :black_large_square: retrocube :white_large_square:
+## :black_large_square: 3D Bash :white_large_square:
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ---
