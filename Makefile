@@ -2,13 +2,13 @@
 # Definitions
 ###############################################
 CC = gcc
-EXEC = cube
+EXEC = 3Dbash
 SRC_DIR = src
 INC_DIR = include
 # where to store the mesh (text) files -
 # set it from the command line if you want another location
 PREFIX = /usr
-CFG_DIR = $(PREFIX)/share/retrocube
+CFG_DIR = $(PREFIX)/share/3Dbash
 CFLAGS = -Wall -Wno-stringop-truncation -Wno-maybe-uninitialized -I$(INC_DIR)\
 	-std=gnu99 -O3 -DCFG_DIR=$(CFG_DIR)
 LDFLAGS = -lm
