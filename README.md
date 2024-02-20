@@ -72,7 +72,7 @@ make PREFIX=~/.config/retrocube
 ```
 You can run the binary with (a list of command line arguments is provided in the next section):
 ```
-./cube
+./3Dbash
 ```
 You can delete the binary and object files with:
 ```
@@ -85,7 +85,7 @@ These are compiled independently from their own file. To compile them you need t
 once again:
 ```
 cd demos
-make PREFIX=~/.config/retrocube
+make PREFIX=~/.config/3Dbash
 # then you will see some binaries and run the binary of your choice
 ```
 
@@ -99,14 +99,6 @@ Similarly, you can uninstall it from `/usr/bin` as:
 ```
 sudo make uninstall
 ```
-
-#### 3.3 Installation as Nix package
-
-On Nix (with flakes enabled) you don't need to install it and you can directly run it with:
-```
-nix run github:leonmavr/retrocube
-```
-Credits for the Nix packaging @pmarreck and @Quantenzitrone.
 
 ### 4. Usage
 
