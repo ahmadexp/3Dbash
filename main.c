@@ -10,14 +10,6 @@
 
 #include "getbno055.h"
 
-// Global variables and defaults 
-
-int g_cube_size = 50;
-int verbose = 0;
-char senaddr[256] = "0x28";
-char i2c_bus[256] = "/dev/i2c-1";
-char object_file[256] = "./mesh_files/cube.scl";
-
 /* Callback that clears the screen and makes the cursor visible when the user hits Ctr+C */
 static void interrupt_handler(int int_num) {
     if (int_num == SIGINT) {
