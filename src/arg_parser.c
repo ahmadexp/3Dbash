@@ -85,10 +85,9 @@ void arg_parse(int argc, char** argv) {
             g_max_iterations = atoi(argv[++i]);
         } else if ((strcmp(argv[i], "--use-perspective") == 0) || (strcmp(argv[i], "-up") == 0)) {
             render_use_perspective(0, 0, -200);
-        } else if ((strcmp(argv[i], "--object-file") == 0) || (strcmp(argv[i], "-ff") == 0)) {
+        } else if ((strcmp(argv[i], "--object-file") == 0)) {
             i++;
             strcpy(object_file, argv[i]);
-			render_from_file = true;
         } else if ((strcmp(argv[i], "--movex") == 0) || (strcmp(argv[i], "-mx") == 0)) {
             g_move_x = atoi(argv[++i]);
         } else if ((strcmp(argv[i], "--movey") == 0) || (strcmp(argv[i], "-my") == 0)) {
