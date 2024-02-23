@@ -1,4 +1,4 @@
-## 3D Bash (a fork from Retrocube)
+## 3D Bash (forked from Retrocube)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ---
